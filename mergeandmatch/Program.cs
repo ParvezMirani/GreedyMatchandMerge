@@ -7,22 +7,27 @@ namespace mergeandmatch
     {
         static void Main(string[] args)
         {
+            //initialise 
             FileOperations fileOperations;
+            var match = new MatchAndMerge();
 
-            Console.WriteLine("info: enter file path press enter");
+            //get user file selection
+            Console.WriteLine("info: enter file path or press enter");
             Console.Write("File Path:(Sample.txt)");
             var filePath = Console.ReadLine();
             
-            //Initiate file by sending file url or choosing default
+            //initalize with file path
             fileOperations =(!string.IsNullOrEmpty(filePath)) ? 
                 new FileOperations(filePath) 
                 :new FileOperations();
+            
+            //Read selected user file
+            var fileStr = fileOperations.ReadFromFile();//returns List<string>
 
-            var fileStr = fileOperations.ReadFromFile();
+            //Match and merge to sortest string
+            match.ConvertToShortestString(fileStr);//converts all fileStrings and returns with only one result
 
-            var match = new MatchAndMerge();
-            match.ConvertToShortestString(fileStr);
-
+            //print result
             Console.WriteLine("\n**************RESULT*****************");
             Console.WriteLine(fileStr[0]);
             

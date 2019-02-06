@@ -10,12 +10,12 @@ namespace mergeandmatch.Controller
     {
         private readonly string fileUrl;
 
-        public FileOperations()
+        public FileOperations()//initialize with default file string
         {
             fileUrl = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\Sample.txt");
         }
 
-        public FileOperations(string fileUrl)
+        public FileOperations(string fileUrl)//initialize with user selected file
         {
             this.fileUrl = fileUrl;
         }
@@ -33,12 +33,13 @@ namespace mergeandmatch.Controller
 
                 //close the file
                 sr.Close();
-
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exception: " + e.Message);
+                Console.WriteLine("OOPS!! Something Went Wrong:\n "+e);
             }
+
+            //convert string into string list by new line
             List<string> result = fileData.Split(new[] { Environment.NewLine },StringSplitOptions.None).ToList();
             
             return result;
